@@ -1,8 +1,10 @@
-from typing import Union
-
 from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI()
+
+class BeerRating(BaseModel):
+    rating: int
 
 
 @app.get("/")
@@ -11,5 +13,5 @@ def read_root():
 
 
 @app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
-    return {"item_id": item_id, "q": q}
+def read_item(item_id: int, query: str = None):
+    return {"item_id": item_id, "q": query}

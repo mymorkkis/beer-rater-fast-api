@@ -1,0 +1,6 @@
+__pycache__/
+.devcontainer
+.*ignore
+docker-compose*
+Dockerfile*
+*.md

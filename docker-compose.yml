@@ -2,14 +2,12 @@ version: '3.9'
 
 services:
   db:
-    ports:
-      - 5432:5432
     image: postgres:15.1-alpine
+    container_name: beer_rater_fast_api_db
     env_file:
       - .env
     volumes:
       - beer-rater-fast-api-data:/var/lib/postgresql/data
-    restart: always
     healthcheck:
       test: pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB
       interval: 2s
@@ -18,10 +16,11 @@ services:
   app:
     build:
       context: .
+    container_name: beer_rater_fast_api_app
     ports:
-      - 80:80
+      - 8000:8000
     volumes:
-      - "./app/:/project/app/"
+      - ./app/:/project/app/
     depends_on:
       db:
         condition: service_healthy
