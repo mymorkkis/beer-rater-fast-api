@@ -17,10 +17,14 @@ services:
     build:
       context: .
     container_name: beer_rater_fast_api_app
+    env_file:
+      - .env
     ports:
       - 8000:8000
     volumes:
       - ./app/:/project/app/
+      - ./poetry.lock:/project/poetry.lock
+      - ./pyproject.toml:/project/pyproject.toml
     depends_on:
       db:
         condition: service_healthy
