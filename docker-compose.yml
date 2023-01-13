@@ -22,9 +22,8 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./app/:/project/app/
-      - ./poetry.lock:/project/poetry.lock
-      - ./pyproject.toml:/project/pyproject.toml
+      # TODO add specific volumes for production app
+      - .:/project/
     depends_on:
       db:
         condition: service_healthy
