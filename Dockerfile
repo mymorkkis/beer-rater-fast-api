@@ -1,9 +1,10 @@
-FROM python:3.11.1-slim-bullseye
+FROM python:3.13-slim-bullseye
 
 WORKDIR /project
 
 COPY poetry.lock pyproject.toml ./
 
+# TODO Pin poetry version
 RUN pip install poetry \
     && poetry config virtualenvs.create false \
     && poetry install --no-interaction --no-ansi

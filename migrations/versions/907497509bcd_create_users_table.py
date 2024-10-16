@@ -17,12 +17,11 @@ depends_on = None
 
 
 def upgrade() -> None:
-    # TODO add unique contstraint on email and hash password
+    # TODO add unique contstraint on email and handle logging in
     op.create_table(
         "users",
         sa.Column("id", sa.Integer, primary_key=True),
         sa.Column("email", sa.String),
-        sa.Column("password", sa.String),
     )
 
 

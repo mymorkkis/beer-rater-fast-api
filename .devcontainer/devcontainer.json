@@ -2,9 +2,14 @@
 	"dockerComposeFile": "../docker-compose.yml",
 	"service": "app",
 	"workspaceFolder": "/project",
-	"extensions": [
-		"ms-python.python",
-		"tamasfe.even-better-toml",
-		"rangav.vscode-thunder-client"
-	]
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"tamasfe.even-better-toml",
+				"ms-azuretools.vscode-docker",
+				"rangav.vscode-thunder-client"
+			]
+		}
+	}
 }
