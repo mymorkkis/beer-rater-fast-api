@@ -11,7 +11,10 @@ db_name = os.environ["POSTGRES_DB"]
 
 url = f"postgresql://{user}:{password}@db:{port}/{db_name}"
 
-engine = create_engine(url=url)  # add echo=True to see SQL statements executed
+engine = create_engine(
+    url=url,
+    # echo=True,  # uncomment to debug SQL statements executed
+)
 
 
 def create_db_and_tables():

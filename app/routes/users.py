@@ -1,4 +1,3 @@
-from typing import Optional
 from fastapi import APIRouter
 from sqlmodel import Field, SQLModel, select
 
@@ -8,8 +7,8 @@ from app.db import DBSession
 
 
 class User(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    email: str
+    id: int | None = Field(default=None, primary_key=True)
+    email: str = Field(unique=True)
 
 
 router = APIRouter()
@@ -22,6 +21,7 @@ async def users(session: DBSession):
 
 @router.post("/users/", response_model=User)
 async def set_rating(user: User, session: DBSession):
+    # TODO Handle unique constraint
     session.add(user)
     session.commit()
     session.refresh(user)

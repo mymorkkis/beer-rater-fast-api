@@ -1,4 +1,3 @@
-from typing import Optional
 from fastapi import APIRouter
 from sqlmodel import Field, SQLModel, select
 
@@ -6,10 +5,10 @@ from app.db import DBSession
 
 
 class BeerRating(SQLModel, table=True):
-    id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: int
-    beer_id: int
-    rating: int
+    id: int | None = Field(default=None, primary_key=True)
+    user_id: int = Field(foreign_key="user.id")
+    beer_id: int  # will be from Brewdog's Punk API
+    rating: int  # TODO limit this to 1-10
 
 
 router = APIRouter()
@@ -29,6 +28,7 @@ async def get_rating(rating_id: int, session: DBSession):
 
 @router.post("/ratings/", response_model=BeerRating)
 async def set_rating(beer_rating: BeerRating, session: DBSession):
+    # TODO filter by user and add pagination
     session.add(beer_rating)
     session.commit()
     session.refresh(beer_rating)
