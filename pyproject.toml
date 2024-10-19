@@ -13,6 +13,7 @@ psycopg2-binary = "^2.9.6"
 sqlmodel = "^0.0.22"
 pydantic = "^2.9.2"
 sqlalchemy = "^2.0.36"
+pydantic-settings = "^2.6.0"
 
 
 [tool.poetry.group.dev.dependencies]

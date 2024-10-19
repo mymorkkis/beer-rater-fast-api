@@ -1,19 +1,20 @@
-import os
 from typing import Annotated
 from fastapi import Depends
 from sqlmodel import SQLModel, Session, create_engine
 
-# TODO Move these to config file using Pydantic Settings
-user = os.environ["POSTGRES_USER"]
-password = os.environ["POSTGRES_PASSWORD"]
-port = os.environ["POSTGRES_PORT"]
-db_name = os.environ["POSTGRES_DB"]
+from app.config import settings
 
-url = f"postgresql://{user}:{password}@db:{port}/{db_name}"
+
+db_user = settings.postgres_user
+db_password = settings.postgres_password
+db_port = settings.postgres_port
+db_name = settings.postgres_db
+
+dsn = f"postgresql://{db_user}:{db_password}@db:{db_port}/{db_name}"
 
 engine = create_engine(
-    url=url,
-    # echo=True,  # uncomment to debug SQL statements executed
+    url=dsn,
+    echo=settings.debug,
 )
 
 
